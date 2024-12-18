@@ -11,7 +11,7 @@ export interface MergeInputs {
 
   /**
    * A Regular Expression pattern matching the artifacts that should be merged.
-   * Alternative to 'pattern' glob matching.
+   * Alternative option to 'pattern' glob matching.
    */
   regex: string
 
