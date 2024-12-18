@@ -47,7 +47,7 @@ export function getInputs(): MergeInputs {
   const patternStr = core.getInput(Inputs.Pattern)
   const regexStr = core.getInput(Inputs.Regex)
   if (regexStr && patternStr) {
-      core.setFailed('Invalid regex. Glob pattern mode is already selected.')
+      core.setFailed('Invalid regex. Glob pattern mode is already selected')
   }
 
     if (inputs.compressionLevel < 0 || inputs.compressionLevel > 9) {
