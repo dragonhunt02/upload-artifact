@@ -8,6 +8,7 @@ import {MergeInputs} from './merge-inputs'
 export function getInputs(): MergeInputs {
   const name = core.getInput(Inputs.Name, {required: true})
   const pattern = core.getInput(Inputs.Pattern, {required: true})
+  const regex = core.getInput(Inputs.Regex)
   const separateDirectories = core.getBooleanInput(Inputs.SeparateDirectories)
   const deleteMerged = core.getBooleanInput(Inputs.DeleteMerged)
   const includeHiddenFiles = core.getBooleanInput(Inputs.IncludeHiddenFiles)
@@ -15,6 +16,7 @@ export function getInputs(): MergeInputs {
   const inputs = {
     name,
     pattern,
+    regex,
     separateDirectories,
     deleteMerged,
     retentionDays: 0,
@@ -36,6 +38,17 @@ export function getInputs(): MergeInputs {
     if (isNaN(inputs.compressionLevel)) {
       core.setFailed('Invalid compression-level')
     }
+
+    if (inputs.compressionLevel < 0 || inputs.compressionLevel > 9) {
+      core.setFailed('Invalid compression-level. Valid values are 0-9')
+    }
+  }
+
+  const patternStr = core.getInput(Inputs.Pattern)
+  const regexStr = core.getInput(Inputs.Regex)
+  if (regexStr && patternStr) {
+      core.setFailed('Invalid regex. Glob pattern mode is already selected.')
+  }
 
     if (inputs.compressionLevel < 0 || inputs.compressionLevel > 9) {
       core.setFailed('Invalid compression-level. Valid values are 0-9')
