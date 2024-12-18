@@ -10,6 +10,12 @@ export interface MergeInputs {
   pattern: string
 
   /**
+   * A Regular Expression pattern matching the artifacts that should be merged.
+   * Alternative to 'pattern' glob matching.
+   */
+  regex: string
+
+  /**
    * Duration after which artifact will expire in days
    */
   retentionDays: number
